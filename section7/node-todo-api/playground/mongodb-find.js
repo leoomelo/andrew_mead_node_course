@@ -26,9 +26,20 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, db) => {
 	});
 
 	//FIND BY OBJECTID
-	db.collection('Todos').find({_id: new ObjectID('599b85ced91b1b04bcac8db5')}).toArray().then((docs) => {		console.log(' <<<<<<<<<<< Find by ObjectID >>>>>>>>>>>')
+	db.collection('Todos').find({
+		_id: new ObjectID('599b85ced91b1b04bcac8db5')
+		}).toArray().then((docs) => {	
+		console.log(' <<<<<<<<<<< Find by ObjectID >>>>>>>>>>>')
 		console.log('Todos');
 		console.log(JSON.stringify(docs, undefined, 2));
+	}, (err) => {
+		console.log('Não foi possível encontrar os documentos');
+	});
+
+	//COUNT
+	db.collection('Todos').find().count().then((count) => {
+		console.log(' <<<<<<<<<<< Quantida de registros >>>>>>>>>>>')
+		console.log(`Todos count: ${count}`);
 	}, (err) => {
 		console.log('Não foi possível encontrar os documentos');
 	})
